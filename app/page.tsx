@@ -10,8 +10,11 @@ import FilterTask from "./components/FilterTask";
 
 export default function Home() {
   const [tasks, setTasks] = useState<ITask[]>(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    return storedTasks ? JSON.parse(storedTasks) : [];
+    if (typeof window !== "undefined") {
+      const storedTasks = localStorage.getItem("tasks");
+      return storedTasks ? JSON.parse(storedTasks) : [];
+    }
+    return [];
   });
   const [filtered, setFiltered] = useState<ITask[]>([]);
 
